@@ -1,24 +1,13 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: myapp
-  labels:
+  name: redis-new
+  labels: 
     app: myapp
+  namespace: web
 spec:
   containers:
-  - name: nginx
-    image: nginx
-    ports:
-    - containerPort: 80
   - name: redis
     image: redis
     ports:
-    - containerPort: 6379
-  - name: memcached
-    image: memcashed
-    ports:
-    - containerPort: 11211
-  - name: consul
-    image: consul
-    ports:
-    - containerPort: 8301
+      - containerPort: 9090
