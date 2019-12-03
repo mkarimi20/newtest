@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: app-data-claim
+spec:
+  resources:                       
+    requests:
+      storage: 1Gi
+  accessModes:
+  - ReadWriteOnce
+  storageClassName: hostpath
+  selector:
+    matchLabels:
+      name: app-data
