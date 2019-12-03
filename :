@@ -3,7 +3,7 @@ kind: PersistentVolume
 metadata:
   name: app-data
   labels:
-    volume: app-data
+    vlolume: app-data
 spec:
  capacity:
    storage: 1Gi

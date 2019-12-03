@@ -11,4 +11,4 @@ spec:
   storageClassName: hostpath
   selector:
     matchLabels:
-      name: app-data
+      volume: app-data
