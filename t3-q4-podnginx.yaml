@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-app
+  labels:
+    app: nginx-app
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    volumeMounts:
+    - name: mymount
+      mountPath: /usr/share/nginx/html
+  volumes:
+  - name: mymount
+    persistentVolumeClaim:
+      claimName: app-data-claim

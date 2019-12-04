@@ -1,0 +1,47 @@
+apiVersion: v1 
+kind: Service 
+metadata: 
+  name: wordpress
+  labels: 
+    app: wordpress
+spec:
+  type: LoadBalancer
+  externalTrafficPolicy: Cluster 
+  ports: 
+  - port: 80
+    targetPort: 80
+    protocol: TCP
+    name: web 
+  selector: 
+    app: wordpress 
+---
+apiVersion: apps/v1beta1 
+kind: StatefulSet 
+metadata: 
+  name: wordpress
+spec: 
+  serviceName: wordpress
+  replicas: 5
+  template: 
+    metadata: 
+      labels: 
+        app: wordpress 
+    spec: 
+      containers: 
+      - name: wordpress
+        image: wordpress:4
+        ports: 
+        - name: http 
+          containerPort: 80
+        volumeMounts: 
+        - name: data 
+          mountPath: /var/www/html 
+  volumeClaimTemplates: 
+  - metadata: 
+      name: data 
+    spec: 
+      resources: 
+        requests: 
+          storage: 1Gi 
+      accessModes: 
+      - ReadWriteOnce 

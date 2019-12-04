@@ -1,0 +1,73 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"apps/v1","kind":"StatefulSet","metadata":{"annotations":{},"labels":{"app":"wordpress"},"name":"wordpress","namespace":"default"},"spec":{"replicas":5,"revisionHistoryLimit":10,"selector":{"matchLabels":{"app":"wordpress"}},"serviceName":"wordpress","template":{"metadata":{"creationTimestamp":null,"labels":{"app":"wordpress"}},"spec":{"containers":[{"image":"wordpress:latest","imagePullPolicy":"IfNotPresent","name":"wordpress","ports":[{"containerPort":80,"name":"http","protocol":"TCP"}],"resources":{},"volumeMounts":[{"mountPath":"/var/www/html","name":"data"}]}],"restartPolicy":"Always"}},"updateStrategy":{"type":"RollingUpdate"},"volumeClaimTemplates":[{"metadata":{"creationTimestamp":null,"name":"data"},"spec":{"accessModes":["ReadWriteOnce"],"dataSource":null,"resources":{"requests":{"storage":"1Gi"}},"volumeMode":"Filesystem"},"status":{"phase":"Pending"}}]},"status":{"collisionCount":0,"currentReplicas":5,"currentRevision":"wordpress-5c996bd89","observedGeneration":1,"readyReplicas":5,"replicas":5,"updateRevision":"wordpress-5c996bd89","updatedReplicas":5}}
+  creationTimestamp: "2019-12-04T22:00:32Z"
+  generation: 2
+  labels:
+    app: wordpress
+  name: wordpress
+  namespace: default
+  resourceVersion: "6598642"
+  selfLink: /apis/apps/v1/namespaces/default/statefulsets/wordpress
+  uid: 7dd7e5b8-16e1-11ea-a1b6-42010a800015
+spec:
+  podManagementPolicy: OrderedReady
+  replicas: 5
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: wordpress
+  serviceName: wordpress
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: wordpress
+    spec:
+      containers:
+      - image: wordpress
+        imagePullPolicy: IfNotPresent
+        name: wordpress
+        ports:
+        - containerPort: 80
+          name: http
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /var/www/html
+          name: data
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+  updateStrategy:
+    type: RollingUpdate
+  volumeClaimTemplates:
+  - metadata:
+      creationTimestamp: null
+      name: data
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      dataSource: null
+      resources:
+        requests:
+          storage: 1Gi
+      volumeMode: Filesystem
+    status:
+      phase: Pending
+status:
+  collisionCount: 0
+  currentReplicas: 5
+  currentRevision: wordpress-85b77b7bcd
+  observedGeneration: 2
+  readyReplicas: 5
+  replicas: 5
+  updateRevision: wordpress-85b77b7bcd
+  updatedReplicas: 5
